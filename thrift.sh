@@ -1,4 +1,3 @@
-set -e
 set -x
 
 # Installs thrift dependencies
@@ -55,6 +54,15 @@ cd bison-2.5.1
 make
 sudo make install
 cd ..
+
+# install boost
+#   warning: this may not work. I had trouble the first time I tried it,
+#            it worked the second time.
+wget http://sourceforge.net/projects/boost/files/boost/1.55.0/boost_1_55_0.tar.gz
+tar xvf boost_1_55_0.tar.gz
+cd boost_1_55_0
+./bootstrap.sh
+sudo ./b2 -j 32 install
 
 # build and install thrift
 git clone https://git-wip-us.apache.org/repos/asf/thrift.git
